@@ -1,4 +1,4 @@
-package silantyevmn.ru.developerinterview;
+package silantyevmn.ru.developerinterview.Lesson1;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+
+import silantyevmn.ru.developerinterview.R;
 
 public class ConvertActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText sourceText;
@@ -54,7 +56,7 @@ public class ConvertActivity extends AppCompatActivity implements View.OnClickLi
     private void convertTo(ConvertTo convertTo) {
         float sourceValue = Float.parseFloat(sourceText.getText().toString());
         Converter converter = new Converter(sourceValue);
-        float destValue = converter.Convert(convertTo).GetResult();
+        float destValue = converter.Convert(convertTo).getResult();
         destText.setText(String.format("%.02f", destValue));
     }
 

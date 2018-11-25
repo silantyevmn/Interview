@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import silantyevmn.ru.developerinterview.Lesson1.*;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -28,7 +30,7 @@ public class ConverterTest {
     public void Converter_GetResult_UnitTest() throws Exception{
         float sourceValue = 22;
         Converter converter = new Converter(sourceValue);
-        float actual = converter.GetResult(); // Получим результат
+        float actual = converter.getResult(); // Получим результат
         // assertThat использует матчеры (is – это матчер)
         assertThat(actual, is(0f)); // Тип float по умолчанию имеет значение 0
     }
@@ -67,7 +69,7 @@ public class ConverterTest {
         float sourceValue = -15;
         Converter converter = new Converter(sourceValue);
         // Вместо mock-объекта используем реальный
-        float actual = converter.Convert(new ConvertToFahrenheit()).GetResult();
+        float actual = converter.Convert(new ConvertToFahrenheit()).getResult();
         assertThat(actual, is(5f));
     }
 

@@ -1,4 +1,4 @@
-package silantyevmn.ru.developerinterview;
+package silantyevmn.ru.developerinterview.Lesson1;
 
 /**
  * Created by silan on 23.11.2018.
@@ -17,7 +17,7 @@ public class Converter {
         return this;
     }
 
-    float GetResult() {
+    public float getResult() {
         return destValue;
     }
 

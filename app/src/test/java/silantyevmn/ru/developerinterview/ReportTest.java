@@ -19,7 +19,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MeteoTest {
+public class ReportTest {
 
     @Test
     public void ReportItem_UnitTest() throws Exception {

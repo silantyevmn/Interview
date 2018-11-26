@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ReportTest {
+public class MeteoTest {
 
     @Test
     public void MS200_UnitTest() throws Exception {

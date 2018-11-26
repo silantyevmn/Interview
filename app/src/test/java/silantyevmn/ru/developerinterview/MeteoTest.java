@@ -4,72 +4,67 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
-import silantyevmn.ru.developerinterview.Lesson2.report.DisplayReport;
-import silantyevmn.ru.developerinterview.Lesson2.report.OutputReport;
-import silantyevmn.ru.developerinterview.Lesson2.report.PrintReport;
-import silantyevmn.ru.developerinterview.Lesson2.report.Programm;
-import silantyevmn.ru.developerinterview.Lesson2.report.Report;
-import silantyevmn.ru.developerinterview.Lesson2.report.ReportItem;
+import silantyevmn.ru.developerinterview.Lesson2.meteo.MS200;
+import silantyevmn.ru.developerinterview.Lesson2.meteo.MeteoSensor;
+import silantyevmn.ru.developerinterview.Lesson2.meteo.MeteoSensorAdapter;
+import silantyevmn.ru.developerinterview.Lesson2.meteo.MeteoStation;
+import silantyevmn.ru.developerinterview.Lesson2.meteo.MeteoStore;
+import silantyevmn.ru.developerinterview.Lesson2.meteo.ST500Info;
+import silantyevmn.ru.developerinterview.Lesson2.meteo.SensorTemperature;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MeteoTest {
+public class ReportTest {
 
     @Test
-    public void ReportItem_UnitTest() throws Exception {
-        ReportItem reportItem = new ReportItem("1", 1);
-        assertThat(reportItem.getDescription(), is("1"));
-        assertThat(reportItem.getAmount(), is(1f));
+    public void MS200_UnitTest() throws Exception {
+        MeteoSensor ms200 = new MS200(1);
+        assertThat(ms200.getId(), is(1));
+        assertThat(ms200.getHumidity(), is(60f));
+        assertThat(ms200.getPressure(), is(752.4f));
+        assertThat(ms200.getTemperature(), is(20f));
+        assertNotNull(ms200.getDateTime());
     }
 
     @Test
-    public void Report_UnitTest() throws Exception {
-        OutputReport outputReport = mock(OutputReport.class);
-        Report report = new Report(outputReport);
-        report.calculate();
-        //проверим значения item
-        List<ReportItem> items = report.getItems();
-        assertThat(items.get(0).getDescription(), is("First"));
-        assertThat(items.get(0).getAmount(), is(5f));
-        assertThat(items.get(1).getDescription(), is("Second"));
-        assertThat(items.get(1).getAmount(), is(6f));
-
-        report.output();
-        verify(outputReport).output(items);
+    public void ST500Info_UnitTest() throws Exception {
+        SensorTemperature sensor = new ST500Info().getData();
+        assertThat(sensor.identifier(), is(1));
+        assertNotNull(sensor.temperature());
+        assertThat(sensor.year(), is(LocalDateTime.now().getYear()));
+        assertThat(sensor.day(), is(LocalDateTime.now().getDayOfYear()));
+        assertNotNull(sensor.second());
     }
 
     @Test
-    public void ReportSetOutput_UnitTest() throws Exception {
-        Report report = mock(Report.class);
-        report.setOutputReport(null);
-        verify(report).setOutputReport(null);
+    public void MeteoStore_UnitTest() throws Exception {
+        MeteoSensor sensor = mock(MeteoSensor.class);
+        MeteoStore store = new MeteoStore();
+        assertTrue(store.save(sensor));
     }
 
     @Test
-    public void DisplayReport_UnitTest() throws Exception {
-        Report report = new Report(new DisplayReport());
-        report.calculate();
-        report.output();
-        assertThat(report.getItems().size(), is(2));
+    public void MeteoSensorAdapter_UnitTest() throws Exception {
+        SensorTemperature sensorTemperature = mock(SensorTemperature.class);
+        MeteoSensor meteoSensor = new MeteoSensorAdapter(sensorTemperature);
+        assertThat(meteoSensor.getId(), is(100));
+        assertThat(meteoSensor.getTemperature(), is(0f));
+        assertNull(meteoSensor.getHumidity());
+        assertNull(meteoSensor.getPressure());
+        assertNotNull(meteoSensor.getDateTime());
     }
 
     @Test
-    public void PrintReport_UnitTest() throws Exception {
-        Report report = new Report(new PrintReport());
-        report.calculate();
-        report.output();
-        assertThat(report.getItems().size(), is(2));
-    }
-
-    @Test
-    public void Programm_UnitTest() throws Exception {
-        Programm programm = new Programm();
-        programm.main(null);
+    public void MeteoStation_UnitTest() throws Exception {
+        MeteoStation meteoStation = new MeteoStation();
+        meteoStation.main(null);
     }
 }

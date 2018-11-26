@@ -11,6 +11,10 @@ public class Report {
     private List<ReportItem> items; // Отчетные данные
     private OutputReport outputReport;
 
+    public List<ReportItem> getItems() {
+        return items;
+    }
+
     public Report(OutputReport outputReport) {
         this.outputReport = outputReport;
     }

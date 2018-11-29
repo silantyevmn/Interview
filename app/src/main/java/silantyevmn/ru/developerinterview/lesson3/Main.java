@@ -15,7 +15,8 @@ public class Main {
         print("Сортировка вставками исх.массив: "+getArrToString(arr1));
         print("По возрастанию: "+getArrToString(cal.insertSortingMinToMax(arr1)));
         print("По убыванию: "+getArrToString(cal.insertSortingMaxToMin(arr1)));
-
+        //2. Разработать и написать на Java алгоритм вычисления чисел Фибоначчи. Определить сложность алгоритма.
+        print("Фибонначи :"+ getArrToString(cal.fib(new int[10])));
 
     }
     private static String getArrToString(int[] arr){

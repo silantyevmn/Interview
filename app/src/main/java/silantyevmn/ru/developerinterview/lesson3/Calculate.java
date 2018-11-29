@@ -48,4 +48,29 @@ public class Calculate {
         }
         return array;
     }
+
+    public List<Integer> eratosfena(int num) {
+        List<Integer> list = initListNumbers(num);
+        int digit = 2;
+        while (digit <= list.size()) {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i) != digit && list.get(i) % digit == 0) {
+                    list.remove(i);
+                    i--;
+                }
+            }
+            digit++;
+        }
+        return list;
+    }
+
+    //заполняем числами список от 2 до num
+    private List<Integer> initListNumbers(int num) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 2; i <= num; i++) {
+            list.add(i);
+        }
+        return list;
+    }
+
 }

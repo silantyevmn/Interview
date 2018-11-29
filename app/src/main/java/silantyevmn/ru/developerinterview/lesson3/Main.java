@@ -17,6 +17,11 @@ public class Main {
         print("По убыванию: "+getArrToString(cal.insertSortingMaxToMin(arr1)));
         //2. Разработать и написать на Java алгоритм вычисления чисел Фибоначчи. Определить сложность алгоритма.
         print("Фибонначи :"+ getArrToString(cal.fib(new int[10])));
+        //3. Разработать и написать двунаправленный связанный список
+        //4. *Разработать и написать на Java алгоритм вычисления простых чисел до 100 (например, с помощью решета Эратосфена).
+        int numberEra=100;
+        print("Решето Эратосфена до "+numberEra);
+        print(Arrays.toString(cal.eratosfena(numberEra).toArray()));
 
     }
     private static String getArrToString(int[] arr){
